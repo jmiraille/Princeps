@@ -29,7 +29,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Fie for front via ActionCable
 gem 'fie', '~> 0.3.3'
-
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -44,6 +43,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
+  gem 'dotenv-rails'
 end
 
 group :development do

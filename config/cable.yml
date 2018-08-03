@@ -1,13 +1,8 @@
-redis: $redis
+redis: &redis
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: fie_princeps_production
+  channel_prefix: fie_example_app_production
 
-development:
-  adapter: *redis
-
-test:
-  adapter: *redis
-
-production:
-  adapter: *redis
+development: *redis
+test: *redis
+production: *redis
