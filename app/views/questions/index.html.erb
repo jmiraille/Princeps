@@ -1,27 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Questions</h1>
+<h1>Create questions via FIE</h1>
+Create question : <input id="new_question" type="text" fie-enter="create_question" value="">
+<h1>Questions :</h1>
+<% @questions.each do |question| %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <p><%= question.content %> |
+    <% parameters = {id: question.id}.to_json %>
+    <button type="button" fie-click="toggle_edit_field" fie-parameters="<%= parameters %>">Edit</button>
+    <%= link_to 'Destroy', question, method: :delete %>
+  </p>
+  <input id="question-edit-<%= question.id %>" type="text"
+         fie-enter="update_question" fie-parameters="<%= parameters %>"
+         value="<%= question.content %>" class="display-none">
 
-  <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.content %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% end %>
 
-<br>
-
-<%= link_to 'New Question', new_question_path %>
+<h1>Filter questions :</h1>
+Filter question by : <input id="filter_question" type="text" fie-enter="filter_questions" value="">
+<button type=button fie-click="refresh_page">Reset filter</button>
