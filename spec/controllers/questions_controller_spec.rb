@@ -43,7 +43,7 @@ RSpec.describe QuestionsController, type: :controller do
     context "with invalid params" do
       it "do not create a question" do
         expect {
-          post :create, params: {question: {}}
+          post :create, params: {question: {content: nil}}
         }.to change(Question, :count).by(0)
       end
     end
@@ -61,15 +61,16 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "with invalid params" do
       it "do not updates the question" do
-        put :update, params: {id: question.id, question: {}}
+        put :update, params: {id: question.id, question: {content: nil}}
         question.reload
-        expect(question.content).to not_eq ""
+        expect(question.content).to_not eq ""
       end
     end
   end
 
   describe "DELETE #destroy" do
     it "destroys the requested question" do
+      question
       expect {
         delete :destroy, params: {id: question.id}
       }.to change(Question, :count).by(-1)
